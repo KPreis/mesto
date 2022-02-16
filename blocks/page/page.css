@@ -1,0 +1,11 @@
+.page {
+  max-width: 1280px;
+  min-width: 320px;
+  flex-direction: column;
+  background: #000000;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: #FFFFFF;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
+}
