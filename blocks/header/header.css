@@ -1,16 +1,15 @@
 .header {
   display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  padding: 45px 0 0;
   width: 880px;
   min-width: 320px;
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 879px) {
   .header {
     width: 100%;
     max-width: 880px;
-    padding: 28px 0 0 27px;
   }
 }
