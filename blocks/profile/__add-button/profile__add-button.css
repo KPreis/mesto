@@ -9,3 +9,13 @@
   justify-self: end;
   align-self: center;
 }
+
+@media screen and (max-width: 660px) {
+  .profile__add-button {
+    margin: 36px auto 0;
+    justify-self: center;
+    align-self: start;
+    width: 90%;
+    min-width: 282px;
+  }
+}

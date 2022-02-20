@@ -1,5 +1,13 @@
 .profile__description {
   font-size: 18px;
   font-weight: 400;
-  line-height: calc(22/18);
+  line-height: calc(22 / 18);
+}
+
+@media screen and (max-width: 660px) {
+  .profile__description {
+    margin: 14px auto 0;
+    font-size: 14px;
+    line-height: calc(14 / 17);
+  }
 }

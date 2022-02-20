@@ -1,0 +1,10 @@
+.card__like {
+  background-color: #fff;
+  background-image: url(../../../images/like-icon.svg);
+  border: none;
+  min-width: 22px;
+  height: 19px;
+  margin: 0 0 0 30px;
+  padding: 0;
+  justify-self: flex-end;
+}
