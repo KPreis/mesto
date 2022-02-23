@@ -3,11 +3,11 @@
   height: 361px;
   border-radius: 10px;
   overflow: hidden;
-  margin: 0 0 20px 0;
+  margin: 0;
 }
 
 @media screen and (max-width: 879px) {
   .card {
-    margin: 0 5px 20px;
+    width: 100%;
   }
 }
