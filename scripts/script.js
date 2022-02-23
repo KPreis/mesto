@@ -12,11 +12,11 @@ let editDescriptionField = editPopUp.querySelector('.pop-up__description-field')
 function openEditPopUp() {
   editNameField.value = profileName.outerText;
   editDescriptionField.value = profileDescription.textContent;
-  editPopUp.setAttribute('style', 'display: flex');
+  editPopUp.classList.toggle('popup_opened');
 }
 
 function closeEditPopUp() {
-  editPopUp.setAttribute('style', 'display: none');
+  editPopUp.classList.toggle('popup_opened');
 }
 
 function saveEditData() {
