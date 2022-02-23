@@ -69,14 +69,25 @@
             <h2 class="card__name">Метеостанция</h2>
             <input class="card__like" type="button"></input>
           </div>
-        </li>
-        
+        </li>       
       </ul>
     </section>
+    <div class="modal">
+      <form class="modal__form" action="edit">
+        <h2 class="modal__header">Редактировать профиль</h2>
+        <fieldset class="modal__fields">
+          <input class="modal__form-item modal__name-field" type="text" name="profileName" value="Жак-Ив Кусто">
+          <input class="modal__form-item modal__description-field" type="text" name="profileDescription" value="Исследователь океана">
+        </fieldset>
+        <input class="modal__save-button" type="button" value="Сохранить">
+        <input class="modal__close-button" type="button">
+      </form>
+    </div>
     <footer class="footer">
       <p class="footer__text">© 2022 Mesto Russia</p>
     </footer>
   </div>
+  
 </body>
 
 </html>

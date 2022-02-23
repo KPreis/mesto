@@ -1,0 +1,15 @@
+.modal__header {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: calc(24 / 29);
+  margin: 0 0 24px;
+}
+
+@media screen and (max-width: 583px) {
+  .modal__header {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: calc(18 / 21.7);
+    margin: 0 0 45px;
+  }
+}
