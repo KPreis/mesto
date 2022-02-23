@@ -1,4 +1,4 @@
-.modal__form {
+.pop-up__form {
   background-color: #ffffff;
   color: #000000;
   width: 430px;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 583px) {
-  .modal__form {
+  .pop-up__form {
     width: 282px;
     height: 322px;
     left: calc(50% - 141px);

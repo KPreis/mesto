@@ -1,4 +1,4 @@
-.modal__header {
+.pop-up__header {
   font-size: 24px;
   font-weight: 900;
   line-height: calc(24 / 29);
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 583px) {
-  .modal__header {
+  .pop-up__header {
     font-size: 18px;
     font-weight: 900;
     line-height: calc(18 / 21.7);
