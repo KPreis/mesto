@@ -14,5 +14,6 @@
     line-height: calc(14 / 17);
     max-width: 282px;
     width: 100%;
+    text-align: center;
   }
 }
