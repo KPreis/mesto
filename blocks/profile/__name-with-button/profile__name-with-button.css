@@ -1,0 +1,13 @@
+.profile__name-with-button {
+  display: flex;
+  justify-content: space-between;
+  width: 336px;
+}
+
+@media screen and (max-width: 660px) {
+  .profile__name-with-button {
+    justify-content: center;
+    max-width: 282px;
+    width: 100%;
+  }
+}
