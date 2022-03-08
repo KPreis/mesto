@@ -12,8 +12,9 @@
 
 @media screen and (max-width: 563px) {
   .footer {
+    box-sizing: border-box;
     padding: 28px 19px 36px;
-    width: 00%;
+    width: 100%;
     min-width: 282px;
   }
 }

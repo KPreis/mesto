@@ -1,5 +1,5 @@
 .profile__edit-button {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid white;
   box-sizing: border-box;
   width: 24px;
@@ -18,12 +18,13 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 700px) {
   .profile__edit-button {
     margin: 23px 0 0;
     background-position: center;
+    background-size: 40%;
     width: 18px;
     height: 18px;
-    padding: 0;
+    padding: 4px;
   }
 }

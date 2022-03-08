@@ -7,7 +7,7 @@
   padding: 40px 0 0;
 }
 
-@media screen and (min-width: 661px) and (max-width: 920px) {
+@media screen and (max-width: 920px) {
   .profile {
     margin: 0;
     grid-template-columns: auto auto auto;
@@ -16,13 +16,11 @@
   }
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 700px) {
   .profile {
     grid-template-columns: 1fr;
     justify-items: center;
     min-width: 320px;
-    width: 100%;
-    max-width: 400px;
     padding: 42px 0 0;
   }
 }

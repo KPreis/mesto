@@ -8,6 +8,7 @@
   font-weight: 400;
   line-height: calc(18 / 21.8);
   margin: 48px 0 0;
+  cursor: pointer;
   transition: opacity 0.2s ease-in-out;
 }
 
