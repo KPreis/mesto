@@ -1,11 +1,3 @@
-/**
- * File: script.js
- *
- * Copyright:
- * Copyright 2022-2022. Konstantin Preis. All Rights Reserved.
- *
- */
-
 
 const profileInfo = document.querySelector('.profile__info'); //find profile__info on the page
 let profileName = profileInfo.querySelector('.profile__name');
@@ -14,8 +6,8 @@ const editProfileButton = profileInfo.querySelector('.profile__edit-button');
 
 const editPopUp = document.querySelector('.pop-up'); 
 const closeButtonPopUp = editPopUp.querySelector('.pop-up__close-button');
-let editNameField = editPopUp.querySelector('.pop-up__name-field');
-let editDescriptionField = editPopUp.querySelector('.pop-up__description-field');
+let editNameField = editPopUp.querySelector('#name-field');
+let editDescriptionField = editPopUp.querySelector('#description-field');
 
 function openEditPopUp() {
   editNameField.value = profileName.textContent;
