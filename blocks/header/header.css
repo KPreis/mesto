@@ -6,10 +6,10 @@
   width: 880px;
   min-width: 320px;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(84, 84, 84, 1);
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 900px) {
   .header {
     width: 100%;
     padding: 0 0 32px 0;
