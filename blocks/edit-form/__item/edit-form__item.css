@@ -1,4 +1,4 @@
-.pop-up__form-item {
+.edit-form__item {
   border: 0;
   width: 100%;
   box-sizing: border-box;
@@ -9,6 +9,6 @@
   padding: 27px 0 13px;
 }
 
-.pop-up__form-item:focus {
+.edit-form__item:focus {
   outline: 1px solid rgba(0, 0, 0, 0.2);
 }

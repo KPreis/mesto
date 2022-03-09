@@ -5,18 +5,18 @@ let profileDescription = profileInfo.querySelector('.profile__description');
 const editProfileButton = profileInfo.querySelector('.profile__edit-button');
 
 const editPopUp = document.querySelector('.pop-up'); 
-const closeButtonPopUp = editPopUp.querySelector('.pop-up__close-button');
+const closeButtonPopUp = editPopUp.querySelector('.edit-form__close-button');
 let editNameField = editPopUp.querySelector('#name-field');
 let editDescriptionField = editPopUp.querySelector('#description-field');
 
 function openEditPopUp() {
   editNameField.value = profileName.textContent;
   editDescriptionField.value = profileDescription.textContent;
-  editPopUp.classList.add('popup_opened');
+  editPopUp.classList.add('pop-up_opened');
 }
 
 function closeEditPopUp() {
-  editPopUp.classList.remove('popup_opened');
+  editPopUp.classList.remove('pop-up_opened');
 }
 
 function saveEditData(evt) {

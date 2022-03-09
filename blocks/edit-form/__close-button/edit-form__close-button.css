@@ -1,4 +1,4 @@
-.pop-up__close-button {
+.edit-form__close-button {
   position: absolute;
   width: 32px;
   height: 32px;
@@ -12,12 +12,12 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.pop-up__close-button:hover {
+.edit-form__close-button:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 583px) {
-  .pop-up__close-button {
+  .edit-form__close-button {
     width: 20px;
     height: 20px;
     top: -36px;
