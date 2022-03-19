@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Konstantin Preis" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Mesto - Russia</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Konstantin Preis">
-  <link rel="stylesheet" href="./pages/index.css">
-  <title>Mesto - Russia</title>
-</head>
-
-<body>
-  <div class="page">
-    <header class="header">
-      <img class="header__logo" src="./images/logo-white.svg" alt="Логотип">
-    </header>
-    <main class="content">
-    <section class="profile">
-      <img class="profile__avatar" src="./images/avatar.jpeg" alt="Жак-Ив Кусто">
-      <div class="profile__info">
-        <div class="profile__name-with-button">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img class="header__logo" src="./images/logo-white.svg" alt="Логотип" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img
+            class="profile__avatar"
+            src="./images/avatar.jpeg"
+            alt="Жак-Ив Кусто"
+          />
+          <div class="profile__info">
+            <div class="profile__name-with-button">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-button"></button>
+            </div>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
+          <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="galary">
+          <ul class="galary__cards-list"></ul>
+        </section>
+        <div class="pop-up">
+          <div class="pop-up__form"></div>
         </div>
-        <p class="profile__description">Исследователь океана</p>
-      </div>
-      <button type="button" class="profile__add-button"></button>
-    </section>
-    <section class="galary">
-      <ul class="galary__cards-list">  
-      </ul>
-    </section>
-    <div class="pop-up">
-      <div class="pop-up__form">
-        <form name="edit-form" class="edit-form">
-          <h2 class="edit-form__header">Редактировать профиль</h2>
-          <fieldset class="edit-form__fields">
-            <input class="edit-form__item" id="name-field" type="text" name="profileName" value="">
-            <input class="edit-form__item" id="description-field" type="text" name="profileDescription" value="">
-          </fieldset>
-          <button class="edit-form__save-button" type="submit">Сохранить</button>
-          <button class="edit-form__close-button" type="button"></button>
-        </form>  
-      </div>    
+        <template id="card">
+          <li class="card">
+            <button class="card__delete" type="button"></button>
+            <img class="card__img" alt="card image" />
+            <div class="card__description">
+              <h2 class="card__name"></h2>
+              <button class="card__like" type="button"></button>
+            </div>
+          </li>
+        </template>
+        <template id="form">
+          <form name="" class="form">
+            <h2 class="form__header"></h2>
+            <fieldset class="form__fields">
+              <input class="form__item" id="" type="text" name="" value="" />
+              <input class="form__item" id="" type="text" name="" value="" />
+            </fieldset>
+            <button class="form__save-button" type="submit">Сохранить</button>
+            <button class="form__close-button" type="button"></button>
+          </form>
+        </template>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2022 Mesto Russia</p>
+      </footer>
     </div>
-    <template id="card">
-      <li class="card">
-        <button class="card__delete" type="button"></button>
-        <img class="card__img" alt="card image">
-        <div class="card__description">
-          <h2 class="card__name"></h2>
-          <button class="card__like" type="button"></button>
-        </div>
-      </li> 
-    </template>
-    </main>
-    <footer class="footer">
-      <p class="footer__text">© 2022 Mesto Russia</p>
-    </footer>
-  </div>
-  <script src="./scripts/script.js"></script>
-</body>
-
+    <script src="./scripts/script.js"></script>
+  </body>
 </html>
