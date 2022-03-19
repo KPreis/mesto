@@ -44,9 +44,13 @@ function addCard(name = "", link = "") {
   newCard.querySelector(".card__img").src = link;
   newCard.querySelector(".card__img").alt = name;
   newCard.querySelector(".card__name").textContent = name;
+  newCard.querySelector(".card__like").addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like_active");
+  });
   return newCard;
 }
 
+function liked() {}
 initialCards.forEach((element) => {
   cardList.append(addCard(element.name, element.link));
 });
