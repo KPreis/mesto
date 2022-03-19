@@ -85,7 +85,7 @@ function saveEditData(evt) {
 }
 
 function openEditPopUp() {
-  const editForm = formTemplate.querySelector(".form").cloneNode(true);
+  const editForm = formTemplate.querySelector(".pop-up__form").cloneNode(true);
   editForm.querySelector(".form__header").textContent = "Редактировать профиль";
 
   const editNameField = editForm.querySelectorAll(".form__item")[0];
@@ -101,7 +101,7 @@ function openEditPopUp() {
   const closeButtonPopUp = editForm.querySelector(".form__close-button");
   closeButtonPopUp.addEventListener("click", closeEditPopUp);
 
-  editPopUp.querySelector(".pop-up__form").append(editForm);
+  editPopUp.append(editForm);
   editPopUp.classList.add("pop-up_opened");
   editPopUp.addEventListener("submit", saveEditData, false);
 }
@@ -115,7 +115,7 @@ function addNewCard(evt) {
 }
 
 function openAddCardPopUp() {
-  const editForm = formTemplate.querySelector(".form").cloneNode(true);
+  const editForm = formTemplate.querySelector(".pop-up__form").cloneNode(true);
   editForm.querySelector(".form__header").textContent = "Новое место";
 
   const nameField = editForm.querySelectorAll(".form__item")[0];
@@ -133,13 +133,13 @@ function openAddCardPopUp() {
   const closeButtonPopUp = editForm.querySelector(".form__close-button");
   closeButtonPopUp.addEventListener("click", closeEditPopUp);
 
-  editPopUp.querySelector(".pop-up__form").append(editForm);
+  editPopUp.append(editForm);
   editPopUp.classList.add("pop-up_opened");
   editPopUp.addEventListener("submit", addNewCard, false);
 }
 
 function closeEditPopUp() {
-  editPopUp.querySelector(".form").remove();
+  editPopUp.querySelector(".pop-up__form").remove();
   editPopUp.classList.remove("pop-up_opened");
 }
 
