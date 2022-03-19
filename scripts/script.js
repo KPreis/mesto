@@ -47,6 +47,9 @@ function addCard(name = "", link = "") {
   newCard.querySelector(".card__like").addEventListener("click", (evt) => {
     evt.target.classList.toggle("card__like_active");
   });
+  newCard.querySelector(".card__delete").addEventListener("click", (evt) => {
+    evt.target.parentElement.remove();
+  });
   return newCard;
 }
 
