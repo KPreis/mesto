@@ -28,49 +28,7 @@
       <button type="button" class="profile__add-button"></button>
     </section>
     <section class="galary">
-      <ul class="galary__cards-list">
-        <li class="card">
-          <img class="card__img" src="./images/taganay.jpeg" alt="Таганай">
-          <div class="card__description">
-            <h2 class="card__name">Таганай</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__img" src="./images/dvuglavaya-sopka.jpeg" alt="Двуглавая сопка">
-          <div class="card__description">
-            <h2 class="card__name">Двуглавая сопка</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__img" src="./images/otkliknoy-greben.jpeg" alt="Откликной Гребень">
-          <div class="card__description">
-            <h2 class="card__name">Откликной Гребень</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__img" src="./images/kruglitsa.webp" alt="Круглица">
-          <div class="card__description">
-            <h2 class="card__name">Круглица</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__img" src="./images/kamennaya-reka.jpeg" alt="Большая Каменная Река">
-          <div class="card__description">
-            <h2 class="card__name">Большая Каменная Река</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>
-        <li class="card">
-          <img class="card__img" src="./images/meteostanciya-taganay.jpeg" alt="Метеостанция">
-          <div class="card__description">
-            <h2 class="card__name">Метеостанция</h2>
-            <button class="card__like" type="button"></button>
-          </div>
-        </li>       
+      <ul class="galary__cards-list">  
       </ul>
     </section>
     <div class="pop-up">
@@ -86,6 +44,16 @@
         </form>  
       </div>    
     </div>
+    <template id="card">
+      <li class="card">
+        <button class="card__delete" type="button"></button>
+        <img class="card__img" alt="card image">
+        <div class="card__description">
+          <h2 class="card__name"></h2>
+          <button class="card__like" type="button"></button>
+        </div>
+      </li> 
+    </template>
     </main>
     <footer class="footer">
       <p class="footer__text">© 2022 Mesto Russia</p>
