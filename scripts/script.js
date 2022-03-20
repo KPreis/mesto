@@ -78,9 +78,9 @@ initialCards.forEach((element) => {
 
 function saveEditData(evt) {
   evt.preventDefault();
-  profileName.textContent = editPopUp.querySelector("#name-field").value;
+  profileName.textContent = evt.target.querySelector("#name-field").value;
   profileDescription.textContent =
-    editPopUp.querySelector("#description-field").value;
+    evt.target.querySelector("#description-field").value;
   closeEditPopUp();
 }
 
@@ -103,13 +103,13 @@ function openEditPopUp() {
 
   editPopUp.append(editForm);
   editPopUp.classList.add("pop-up_opened");
-  editPopUp.addEventListener("submit", saveEditData, false);
+  editForm.addEventListener("submit", saveEditData, false);
 }
 
 function addNewCard(evt) {
   evt.preventDefault();
-  const name = editPopUp.querySelector("#name-field").value;
-  const link = editPopUp.querySelector("#link-field").value;
+  const name = evt.target.querySelector("#name-field").value;
+  const link = evt.target.querySelector("#link-field").value;
   cardList.prepend(addCard(name, link));
   closeEditPopUp();
 }
@@ -135,7 +135,7 @@ function openAddCardPopUp() {
 
   editPopUp.append(editForm);
   editPopUp.classList.add("pop-up_opened");
-  editPopUp.addEventListener("submit", addNewCard, false);
+  editForm.addEventListener("submit", addNewCard, false);
 }
 
 function closeEditPopUp() {
