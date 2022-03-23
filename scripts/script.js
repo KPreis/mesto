@@ -56,19 +56,11 @@ const initialCards = [
 ];
 
 function openPopup(popup) {
-  if (popup == imagePopup) {
-    popup.classList.add("pop-up_opened_image");
-  } else {
-    popup.classList.add("pop-up_opened_form");
-  }
+  popup.classList.add("pop-up_opened");
 }
 
 function closePopup(popup) {
-  if (popup == imagePopup) {
-    popup.classList.remove("pop-up_opened_image");
-  } else {
-    popup.classList.remove("pop-up_opened_form");
-  }
+  popup.classList.remove("pop-up_opened");
 }
 
 function addCard(name = "", link = "") {
