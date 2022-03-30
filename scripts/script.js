@@ -55,12 +55,29 @@ const initialCards = [
   },
 ];
 
+const keyHandler = (evt) => {
+  const popupOpened = document.querySelector(".pop-up_opened");
+  if (evt.key === "Escape") {
+    closePopup(popupOpened);
+  }
+};
+
+const clickHandler = (evt) => {
+  if (evt.target.classList.contains("pop-up_opened")) {
+    closePopup(evt.target);
+  }
+};
+
 function openPopup(popup) {
   popup.classList.add("pop-up_opened");
+  document.addEventListener("keydown", keyHandler);
+  popup.addEventListener("click", clickHandler);
 }
 
 function closePopup(popup) {
   popup.classList.remove("pop-up_opened");
+  document.removeEventListener("keydown", keyHandler);
+  popup.removeEventListener("click", clickHandler);
 }
 
 function addCard(name = "", link = "") {
