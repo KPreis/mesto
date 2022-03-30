@@ -1,0 +1,5 @@
+.form__item-error {
+  visibility: hidden;
+  margin-top: 5px;
+  color: #ff0000;
+}

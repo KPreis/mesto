@@ -39,7 +39,12 @@
       </footer>
       <div class="pop-up" id="profileEditPopup">
         <div class="pop-up__form">
-          <form name="profileEditForm" class="form">
+          <form
+            name="profileEditForm"
+            class="form"
+            id="profileEditForm"
+            novalidate
+          >
             <h2 class="form__header">Редактировать профиль</h2>
             <fieldset class="form__fields">
               <input
@@ -48,14 +53,23 @@
                 type="text"
                 name="name"
                 value=""
+                required
+                minlength="2"
+                maxlength="40"
               />
+              <span class="form__item-error profileNameEditField-error"></span>
               <input
                 class="form__item"
                 id="profileDescriptionEditField"
                 type="text"
                 name="description"
                 value=""
+                required
+                minlength="2"
+                maxlength="200"
               />
+              <span class="form__item-error profileDescriptionEditField-error">
+              </span>
             </fieldset>
             <button class="form__save-button" type="submit">Сохранить</button>
             <button class="pop-up__close-button" type="button"></button>
@@ -64,7 +78,12 @@
       </div>
       <div class="pop-up" id="cardAddPopup">
         <div class="pop-up__form">
-          <form name="newCardAddForm" class="form">
+          <form
+            name="newCardAddForm"
+            class="form"
+            id="newCardAddForm"
+            novalidate
+          >
             <h2 class="form__header">Новое место</h2>
             <fieldset class="form__fields">
               <input
@@ -74,15 +93,21 @@
                 name="name"
                 value=""
                 placeholder="Название"
+                required
+                minlength="2"
+                maxlength="40"
               />
+              <span class="form__item-error cardNameField-error"></span>
               <input
                 class="form__item"
                 id="cardLinkField"
-                type="text"
+                type="url"
                 name="link"
                 value=""
                 placeholder="Ссылка на картинку"
+                required
               />
+              <span class="form__item-error cardLinkField-error"></span>
             </fieldset>
             <button class="form__save-button" type="submit">Сохранить</button>
             <button class="pop-up__close-button" type="button"></button>
@@ -112,5 +137,6 @@
       </template>
     </div>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
