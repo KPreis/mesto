@@ -17,6 +17,7 @@ const cardAddPopup = document.querySelector("#cardAddPopup");
 const cardNameField = cardAddPopup.querySelector("#cardNameField");
 const cardLinkField = cardAddPopup.querySelector("#cardLinkField");
 const buttonCloseAddCard = cardAddPopup.querySelector(".pop-up__close-button");
+const buttonSaveAddCard = cardAddPopup.querySelector(".form__save-button");
 
 const imagePopup = document.querySelector("#imagePopup");
 const imageFigure = imagePopup.querySelector(".pop-up__image");
@@ -28,50 +29,35 @@ const cardsContainer = galary.querySelector(".galary__cards-list");
 
 const cardTemplate = document.querySelector("#card").content;
 
-const initialCards = [
-  {
-    name: "Таганай",
-    link: "https://mesto.kpreis.ru/images/taganay.jpeg",
-  },
-  {
-    name: "Двуглавая сопка",
-    link: "https://mesto.kpreis.ru/images/dvuglavaya-sopka.jpeg",
-  },
-  {
-    name: "Откликной Гребень",
-    link: "https://mesto.kpreis.ru/images/otkliknoy-greben.jpeg",
-  },
-  {
-    name: "Круглица",
-    link: "https://mesto.kpreis.ru/images/kruglitsa.webp",
-  },
-  {
-    name: "Большая Каменная Река",
-    link: "https://mesto.kpreis.ru/images/kamennaya-reka.jpeg",
-  },
-  {
-    name: "Метеостанция",
-    link: "https://mesto.kpreis.ru/images/meteostanciya-taganay.jpeg",
-  },
-];
-
 const keyHandler = (evt) => {
   const popupOpened = document.querySelector(".pop-up_opened");
   if (evt.key === "Escape") {
     closePopup(popupOpened);
+    clearImagePopup();
   }
 };
 
 const clickHandler = (evt) => {
   if (evt.target.classList.contains("pop-up_opened")) {
     closePopup(evt.target);
+    clearImagePopup();
   }
+};
+
+const clearImagePopup = () => {
+  imageFigure.src = "";
+  imageFigure.alt = "";
+  imageLabel.textContent = "";
 };
 
 function openPopup(popup) {
   popup.classList.add("pop-up_opened");
   document.addEventListener("keydown", keyHandler);
   popup.addEventListener("click", clickHandler);
+  const inputItemsList = Array.from(
+    popup.querySelectorAll(selectorList.inputSelector)
+  );
+  changeButtonState(inputItemsList, buttonSaveAddCard);
 }
 
 function closePopup(popup) {
@@ -127,6 +113,8 @@ function addNewCard(evt) {
 
   cardNameField.value = "";
   cardLinkField.value = "";
+
+  buttonSaveAddCard.classList.add("form__save-button_disabled");
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -153,5 +141,6 @@ buttonCloseAddCard.addEventListener("click", () => {
 });
 
 buttonCloseImage.addEventListener("click", () => {
+  clearImagePopup();
   closePopup(imagePopup);
 });

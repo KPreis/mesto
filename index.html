@@ -128,7 +128,9 @@
       <template id="card">
         <li class="card">
           <button class="card__delete" type="button"></button>
-          <img class="card__img" alt="card image" />
+          <div class="card__img-container">
+            <img class="card__img" alt="card image" />
+          </div>
           <div class="card__description">
             <h2 class="card__name"></h2>
             <button class="card__like" type="button"></button>
@@ -136,6 +138,7 @@
         </li>
       </template>
     </div>
+    <script src="./scripts/consts.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/validate.js"></script>
   </body>
