@@ -1,12 +1,3 @@
-const selectorList = {
-  formSelector: ".form",
-  inputSelector: ".form__item",
-  submitButtonSelector: ".form__save-button",
-  inactiveButtonClass: "form__save-button_disabled",
-  inputErrorClass: "form__item_type_error",
-  errorClass: "form__item-error_active",
-};
-
 //Show error message
 const showInputError = (formElement, inputItem, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputItem.id}-error`);
@@ -63,10 +54,6 @@ const setEventListeners = (formElement) => {
   const buttonSave = formElement.querySelector(
     selectorList.submitButtonSelector
   );
-
-  if (formElement.id === "newCardAddForm") {
-    changeButtonState(inputItemsList, buttonSave);
-  }
 
   inputItemsList.forEach((inputItem) => {
     inputItem.addEventListener("input", (event) => {

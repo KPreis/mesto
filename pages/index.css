@@ -16,6 +16,7 @@
 @import url(../blocks/galary/__cards-list/galary__cards-list.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__img-container/card__img-container.css);
 @import url(../blocks/card/__img/card__img.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__name/card__name.css);
