@@ -54,10 +54,6 @@ function openPopup(popup) {
   popup.classList.add("pop-up_opened");
   document.addEventListener("keydown", keyHandler);
   popup.addEventListener("click", clickHandler);
-  const inputItemsList = Array.from(
-    popup.querySelectorAll(selectorList.inputSelector)
-  );
-  changeButtonState(inputItemsList, buttonSaveAddCard);
 }
 
 function closePopup(popup) {
@@ -113,8 +109,6 @@ function addNewCard(evt) {
 
   cardNameField.value = "";
   cardLinkField.value = "";
-
-  buttonSaveAddCard.classList.add("form__save-button_disabled");
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -127,10 +121,15 @@ profileEditButton.addEventListener("click", () => {
 profilePopup.addEventListener("submit", saveProfileData, false);
 
 cardAddButton.addEventListener("click", () => {
-  openPopup(cardAddPopup);
+  const inputItemsList = Array.from(
+    cardAddPopup.querySelectorAll(selectorList.inputSelector)
+  );
+  changeButtonState(inputItemsList, buttonSaveAddCard);
 
-  cardAddPopup.addEventListener("submit", addNewCard, false);
+  openPopup(cardAddPopup);
 });
+
+cardAddPopup.addEventListener("submit", addNewCard, false);
 
 buttonCloseEditProfile.addEventListener("click", () => {
   closePopup(profilePopup);
