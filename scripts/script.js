@@ -33,14 +33,12 @@ const keyHandler = (evt) => {
   const popupOpened = document.querySelector(".pop-up_opened");
   if (evt.key === "Escape") {
     closePopup(popupOpened);
-    clearImagePopup();
   }
 };
 
 const clickHandler = (evt) => {
   if (evt.target.classList.contains("pop-up_opened")) {
     closePopup(evt.target);
-    clearImagePopup();
   }
 };
 
