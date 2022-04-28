@@ -1,15 +1,17 @@
 export class Card {
-  constructor(data, openpopupFunction) {
+  constructor(data, cardSelector, openpopupFunction) {
     this._name = data.name;
     this._link = data.link;
+    this._cardSelector = cardSelector;
     this._openpopup = openpopupFunction;
   }
 
   _getTemplate() {
-    return document
-      .querySelector('#card')
+    const cardElement = document
+      .querySelector(this._cardSelector)
       .content.querySelector('.card')
       .cloneNode(true);
+    return cardElement;
   }
 
   _handleImageClick() {
