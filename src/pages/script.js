@@ -1,7 +1,7 @@
-import Card from '../src/components/Card.js';
-import FormValidator from '../src/components/FormValidator.js';
-import { initialCards, validationConfig } from '../src/utils/consts.js';
-import Section from '../src/components/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import { initialCards, validationConfig } from '../utils/consts.js';
+import Section from '../components/Section.js';
 
 const profileInfo = document.querySelector('.profile__info'); //find profile__info on the page
 const profileName = profileInfo.querySelector('.profile__name');
