@@ -1,39 +1,44 @@
 import Popup from './Popup.js';
+import UserInfo from './UserInfo.js';
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = this._popup.querySelector('#profileEditForm');
-    this._fieldName = this._form.querySelector('#profileNameEditField');
-    this._fieldDescription = this._form.querySelector(
-      '#profileDescriptionEditField'
-    );
+    this._form = this._popup.querySelector('.pop-up__form');
+    this._inputList = this._form.querySelectorAll('.form__item');
   }
 
   _getInputValues = () => {
-    const values = {
-      name: this._fieldName.value,
-      description: this._fieldDescription.value,
-    };
-
-    return values;
+    const inputValues = {};
+    this._inputList.forEach((input) => {
+      inputValues[input.name] = input.value;
+    });
+    return inputValues;
   };
 
-  _submitForm = (evt) => {
-    evt.preventDefault();
-    this._handleFormSubmit(this._getInputValues());
-    this.close();
+  setInputValues = () => {
+    const personalProfile = new UserInfo(
+      '.profile__name',
+      '.profile__description'
+    );
+    this._inputList.forEach((input) => {
+      input.value = personalProfile.getUserInfo()[input.name];
+    });
   };
 
   setEventListeners = () => {
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+      this.close();
+    });
     super.setEventListeners();
-    this._form.addEventListener('submit', this._submitForm);
   };
 
-  close = () => {
-    super.close();
-    this._form.removeEventListener('submit', this._submitForm);
+  close() {
     this._form.reset();
-  };
+    //this._handleFormSubmit.reset();
+    super.close();
+  }
 }

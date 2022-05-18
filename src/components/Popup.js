@@ -1,14 +1,13 @@
 export default class Popup {
   constructor(selectorPopup) {
-    this._selectorPopup = selectorPopup;
-    this._popup = documents.querySelector(this._selectorPopup);
+    this._popup = document.querySelector(selectorPopup);
     this._closeButton = this._popup.querySelector('.pop-up__close-button');
   }
 
-  open = () => {
+  open() {
     this._popup.classList.add('pop-up_opened');
     this.setEventListeners();
-  };
+  }
 
   close = () => {
     this._popup.classList.remove('pop-up_opened');
@@ -18,7 +17,7 @@ export default class Popup {
 
   _clickHandler = (evt) => {
     if (evt.target.classList.contains('pop-up_opened')) {
-      closePopup(evt.target);
+      this.close();
     }
   };
 
@@ -30,6 +29,7 @@ export default class Popup {
       this.close();
     }
   };
+
   setEventListeners() {
     this._closeButton.addEventListener('click', this.close);
     document.addEventListener('keydown', this._handleEscClose);
