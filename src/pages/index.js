@@ -31,6 +31,7 @@ const popupEditProfilePopup = new PopupWithForm(
     personalProfile.setUserInfo(formData);
   }
 );
+popupEditProfilePopup.setEventListeners();
 
 const popupImage = new PopupWithImage('#imagePopup');
 popupImage.setEventListeners();
@@ -47,8 +48,8 @@ const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
   );
   const newCard = card.createCard();
   cardList.addItem(newCard);
-  card.innerHTML = '';
 });
+popupAddCard.setEventListeners();
 
 const cardList = new Section(
   {
