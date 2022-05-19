@@ -5,8 +5,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
   font-weight: 400;
-  line-height: calc(14 / 17);
-  padding: 27px 0 13px;
+  line-height: 17px;
+  padding: 8px 0 0;
 }
 
 .form__item:focus {
