@@ -14,7 +14,6 @@ export default class UserInfo {
   };
 
   setUserInfo = ({ name, description }) => {
-    console.log(this._fieldName, this._fieldDescriptions);
     this._fieldName.textContent = name;
     this._fieldDescriptions.textContent = description;
   };
