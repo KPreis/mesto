@@ -1,11 +1,10 @@
 import Popup from './Popup.js';
-import UserInfo from './UserInfo.js';
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = this._popup.querySelector('.pop-up__form');
+    this._form = this._popup.querySelector('.form');
     this._inputList = this._form.querySelectorAll('.form__item');
   }
 
@@ -17,13 +16,9 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   };
 
-  setInputValues = () => {
-    const personalProfile = new UserInfo(
-      '.profile__name',
-      '.profile__description'
-    );
+  setInputValues = (data) => {
     this._inputList.forEach((input) => {
-      input.value = personalProfile.getUserInfo()[input.name];
+      input.value = data[input.name];
     });
   };
 
@@ -31,7 +26,6 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     });
     super.setEventListeners();
   };

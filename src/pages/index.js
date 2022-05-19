@@ -8,8 +8,6 @@ import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
 const profileInfo = document.querySelector('.profile__info');
-const profileName = profileInfo.querySelector('.profile__name');
-const profileDescription = profileInfo.querySelector('.profile__description');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const cardAddButton = document.querySelector('.profile__add-button');
 
@@ -25,10 +23,26 @@ const validatorCardAddPopup = new FormValidator(validationConfig, cardAddPopup);
 
 const personalProfile = new UserInfo('.profile__name', '.profile__description');
 
+const initialCard = (data) => {
+  const card = new Card(
+    {
+      data: data,
+      handleCardClick: (name, link) => {
+        popupImage.open(name, link);
+      },
+    },
+    '#card'
+  );
+  const newCard = card.createCard();
+
+  return newCard;
+};
+
 const popupEditProfilePopup = new PopupWithForm(
   '#profileEditPopup',
   (formData) => {
     personalProfile.setUserInfo(formData);
+    popupEditProfilePopup.close();
   }
 );
 popupEditProfilePopup.setEventListeners();
@@ -37,17 +51,8 @@ const popupImage = new PopupWithImage('#imagePopup');
 popupImage.setEventListeners();
 
 const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
-  const card = new Card(
-    {
-      data: formData,
-      handleCardClick: (name, link) => {
-        popupImage.open(name, link);
-      },
-    },
-    '#card'
-  );
-  const newCard = card.createCard();
-  cardList.addItem(newCard);
+  cardList.addItem(initialCard(formData));
+  popupAddCard.close();
 });
 popupAddCard.setEventListeners();
 
@@ -55,17 +60,7 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        {
-          data: item,
-          handleCardClick: (name, link) => {
-            popupImage.open(name, link);
-          },
-        },
-        '#card'
-      );
-      const newCard = card.createCard();
-      cardsContainer.append(newCard);
+      cardsContainer.append(initialCard(item));
     },
   },
   '.galary__cards-list'
@@ -73,23 +68,16 @@ const cardList = new Section(
 
 cardList.renderItems();
 
-function saveProfileData(evt) {
-  evt.preventDefault();
-
-  profileName.textContent = fieldNamePopup.value;
-  profileDescription.textContent = fieldDescriptionPopup.value;
-
-  closePopup(profilePopup);
-  validatorProfilePopup.resetValidation();
-}
-
 cardAddButton.addEventListener('click', () => {
-  validatorCardAddPopup.enableValidation();
   popupAddCard.open();
+  validatorCardAddPopup.resetValidation();
 });
 
 profileEditButton.addEventListener('click', () => {
-  validatorProfilePopup.enableValidation();
   popupEditProfilePopup.open();
-  popupEditProfilePopup.setInputValues();
+  popupEditProfilePopup.setInputValues(personalProfile.getUserInfo());
+  validatorProfilePopup.resetValidation();
 });
+
+validatorProfilePopup.enableValidation();
+validatorCardAddPopup.enableValidation();

@@ -21,7 +21,7 @@ export default class Card {
   }
 
   _handleRemoveClick() {
-    this._card.querySelector('.card__delete').closest('.card').remove();
+    this._card.remove();
   }
 
   _setEventListeners() {
