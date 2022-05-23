@@ -19,11 +19,13 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/avatar.jpeg')%>"
-            alt="Жак-Ив Кусто"
-          />
+          <div class="profile__avatar_hover">
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/avatar.jpeg')%>"
+              alt="Жак-Ив Кусто"
+            />
+          </div>
           <div class="profile__info">
             <div class="profile__name-with-button">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -176,7 +178,10 @@
           </div>
           <div class="card__description">
             <h2 class="card__name"></h2>
-            <button class="card__like" type="button"></button>
+            <div class="card__like-block">
+              <button class="card__like" type="button"></button>
+              <p class="card__like-counter">0</p>
+            </div>
           </div>
         </li>
       </template>

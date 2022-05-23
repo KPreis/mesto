@@ -4,8 +4,7 @@
   border: none;
   min-width: 22px;
   height: 19px;
-  margin: 0 0 0 30px;
-  padding: 0;
+
   justify-self: flex-end;
   transition: opacity 0.3s ease;
 }
