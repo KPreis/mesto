@@ -1,27 +1,66 @@
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { initialCards, validationConfig } from '../utils/consts.js';
+import { initialCards, validationConfig, authConfig } from '../utils/consts.js';
 import Section from '../components/Section.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/popupWithForm.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
 const profileInfo = document.querySelector('.profile__info');
+const profileAvatar = document.querySelector('.profile__avatar');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const cardAddButton = document.querySelector('.profile__add-button');
 
 const galary = document.querySelector('.galary');
-const cardsContainer = galary.querySelector('.galary__cards-list');
 
 const profilePopup = document.querySelector('#profileEditPopup');
 const cardAddPopup = document.querySelector('#cardAddPopup');
+const avatarPopup = document.querySelector('#avatarUpdatePopup');
+
+let userID = '';
+
+const cardList = new Section('.galary__cards-list');
 
 const validatorProfilePopup = new FormValidator(validationConfig, profilePopup);
 
 const validatorCardAddPopup = new FormValidator(validationConfig, cardAddPopup);
 
-const personalProfile = new UserInfo('.profile__name', '.profile__description');
+const validatorAvatarEditPopup = new FormValidator(
+  validationConfig,
+  avatarPopup
+);
+
+const personalProfile = new UserInfo(
+  '.profile__name',
+  '.profile__description',
+  '.profile__avatar'
+);
+
+const changeTextOnSaveButton = (popup) => {
+  const submitButton = popup.querySelector('.form__save-button');
+  if (submitButton.textContent === 'Сохранить') {
+    submitButton.textContent = 'Сохранение...';
+  } else {
+    submitButton.textContent = 'Сохранить';
+  }
+};
+
+const api = new Api(authConfig);
+
+api.getInitialCards().then((result) => {
+  result.forEach((card) => {
+    cardList.addItem(initialCard(card));
+  });
+});
+
+api.getProfile().then((profile) => {
+  personalProfile.setUserInfo(profile);
+  personalProfile.setAvatar(profile['avatar']);
+  userID = profile['_id'];
+});
 
 const initialCard = (data) => {
   const card = new Card(
@@ -29,6 +68,27 @@ const initialCard = (data) => {
       data: data,
       handleCardClick: (name, link) => {
         popupImage.open(name, link);
+      },
+      isCreator: userID == data['owner']['_id'],
+      currentUserId: userID,
+      handleDeleteCardClick: (cardId) => {
+        popupConfirmDeleteCard.open(cardId);
+      },
+      handleLikeClick: (cardLiking, cardData) => {
+        const like = cardLiking.querySelector('.card__like');
+        const likeCounter = cardLiking.querySelector('.card__like-counter');
+
+        if (like.classList.contains('card__like_active')) {
+          like.classList.remove('card__like_active');
+          api.deleteLike(cardData['_id']).then((result) => {
+            likeCounter.textContent = result['likes'].length;
+          });
+        } else {
+          like.classList.add('card__like_active');
+          api.setLike(cardData['_id']).then((result) => {
+            likeCounter.textContent = result['likes'].length;
+          });
+        }
       },
     },
     '#card'
@@ -41,32 +101,72 @@ const initialCard = (data) => {
 const popupEditProfilePopup = new PopupWithForm(
   '#profileEditPopup',
   (formData) => {
-    personalProfile.setUserInfo(formData);
-    popupEditProfilePopup.close();
+    api
+      .setProfile(formData)
+      .then((result) => {
+        changeTextOnSaveButton(profilePopup);
+        return result;
+      })
+      .then((result) => {
+        personalProfile.setUserInfo(result);
+      })
+      .then(() => {
+        popupEditProfilePopup.close();
+        changeTextOnSaveButton(profilePopup);
+      });
   }
 );
 popupEditProfilePopup.setEventListeners();
+
+const popupEditAvatar = new PopupWithForm('#avatarUpdatePopup', (data) => {
+  api
+    .setAvatar(data['link'])
+    .then((result) => {
+      changeTextOnSaveButton(avatarPopup);
+      return result;
+    })
+    .then((result) => {
+      personalProfile.setAvatar(result['link']);
+    })
+    .then(() => {
+      popupEditAvatar.close();
+      changeTextOnSaveButton(avatarPopup);
+    });
+});
+popupEditAvatar.setEventListeners();
 
 const popupImage = new PopupWithImage('#imagePopup');
 popupImage.setEventListeners();
 
 const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
-  cardList.addItem(initialCard(formData));
-  popupAddCard.close();
+  api
+    .sendNewCard(formData)
+    .then((result) => {
+      changeTextOnSaveButton(cardAddPopup);
+      return result;
+    })
+    .then((result) => {
+      cardList.addItem(initialCard(result));
+    })
+    .then(() => {
+      popupAddCard.close();
+      changeTextOnSaveButton(cardAddPopup);
+    });
 });
 popupAddCard.setEventListeners();
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      cardsContainer.append(initialCard(item));
-    },
-  },
-  '.galary__cards-list'
+const popupConfirmDeleteCard = new PopupWithConfirmation(
+  '#cardConfirmDeletePopup',
+  (cardId) => {
+    console.log(cardId);
+    api.deleteCard(cardId).then((result) => {
+      if (result['message'] == 'Пост удалён') {
+        popupConfirmDeleteCard.close();
+      }
+    });
+  }
 );
-
-cardList.renderItems();
+popupConfirmDeleteCard.setEventListeners();
 
 cardAddButton.addEventListener('click', () => {
   popupAddCard.open();
@@ -79,5 +179,11 @@ profileEditButton.addEventListener('click', () => {
   validatorProfilePopup.resetValidation();
 });
 
+profileAvatar.addEventListener('click', () => {
+  popupEditAvatar.open();
+  validatorAvatarEditPopup.resetValidation();
+});
+
 validatorProfilePopup.enableValidation();
 validatorCardAddPopup.enableValidation();
+validatorAvatarEditPopup.enableValidation();

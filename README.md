@@ -17,10 +17,14 @@
 - (ПР6) Реализована валидация форм
 - (ПР6) Реализовано закрытие попапов по нажатию на кнопку Esc и кликом на оверлей
 - (ПР7) Реализованы классы Card и FormValidation
-- (NEW) Реализованы классы Section, UserInfo, Popup, PopupWithForm и PopupWithForm
-- (NEW) Изменена структура файлов и подключен Webpack
+- (ПР8) Реализованы классы Section, UserInfo, Popup, PopupWithForm и PopupWithForm
+- (ПР8) Изменена структура файлов и подключен Webpack
+- (NEW) Реализована загрузка контента с сервера
+- (NEW) Реализовано редактирование профайла и смена аватара с отправкой на сервер
+- (NEW) Реализован счётчик лайков с отправкой на сервер
+- (NEW) Реализованы попапы подтверждения удаления карточки и смены аватара
 
 **Где можно посмотреть**
 
-- [Ссылка на страничку в GitHub Pages](https://kpreis.github.io/mesto/index.html)
+- [Ссылка на страничку в GitHub Pages](https://kpreis.github.io/mesto/)
 - [https://mesto.kpreis.ru](https://mesto.kpreis.ru)
