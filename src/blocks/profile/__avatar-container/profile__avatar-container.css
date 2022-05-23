@@ -1,5 +1,5 @@
-.profile__avatar_hover {
-  background-image: url(../../../../images/edit-pen.svg);
+.profile__avatar-container {
+  background-image: url(../../../images/edit-pen.svg);
   background-repeat: no-repeat;
   background-position: center;
   width: 120px;
