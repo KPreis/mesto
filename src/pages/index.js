@@ -56,17 +56,18 @@ const api = new Api({
   },
 });
 
-api.getInitialCards().then((result) => {
-  result.forEach((card) => {
-    cardList.addItem(initialCard(card));
+Promise.all([api.getInitialCards(), api.getProfile()])
+  .then(([cards, userData]) => {
+    cards.forEach((card) => {
+      cardList.addItem(initialCard(card));
+    });
+    personalProfile.setUserInfo(userData);
+    personalProfile.setAvatar(userData['avatar']);
+    userID = userData['_id'];
+  })
+  .catch((error) => {
+    console.log(error);
   });
-});
-
-api.getProfile().then((profile) => {
-  personalProfile.setUserInfo(profile);
-  personalProfile.setAvatar(profile['avatar']);
-  userID = profile['_id'];
-});
 
 const initialCard = (data) => {
   const card = new Card(
