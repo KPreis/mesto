@@ -48,19 +48,27 @@ const changeTextOnSaveButton = (popup) => {
   }
 };
 
-const api = new Api(authConfig);
+const api = new Api({
+  baseUrl: `https:///mesto.nomoreparties.co/v1/${authConfig.cohortId}`,
+  headers: {
+    authorization: `${authConfig.token}`,
+    'Content-Type': 'application/json',
+  },
+});
 
-api.getInitialCards().then((result) => {
-  result.forEach((card) => {
-    cardList.addItem(initialCard(card));
+Promise.all([api.getInitialCards(), api.getProfile()])
+  .then(([cards, userData]) => {
+    personalProfile.setUserInfo(userData);
+    personalProfile.setAvatar(userData['avatar']);
+    userID = userData['_id'];
+
+    cards.forEach((card) => {
+      cardList.addItem(initialCard(card));
+    });
+  })
+  .catch((error) => {
+    console.log(error);
   });
-});
-
-api.getProfile().then((profile) => {
-  personalProfile.setUserInfo(profile);
-  personalProfile.setAvatar(profile['avatar']);
-  userID = profile['_id'];
-});
 
 const initialCard = (data) => {
   const card = new Card(
@@ -71,24 +79,18 @@ const initialCard = (data) => {
       },
       isCreator: userID == data['owner']['_id'],
       currentUserId: userID,
-      handleDeleteCardClick: (cardId) => {
-        popupConfirmDeleteCard.open(cardId);
+      handleDeleteCardClick: (cardDeleteId, cardDelete) => {
+        popupConfirmDeleteCard.open(cardDeleteId, cardDelete);
       },
-      handleLikeClick: (cardLiking, cardData) => {
-        const like = cardLiking.querySelector('.card__like');
-        const likeCounter = cardLiking.querySelector('.card__like-counter');
-
-        if (like.classList.contains('card__like_active')) {
-          like.classList.remove('card__like_active');
-          api.deleteLike(cardData['_id']).then((result) => {
-            likeCounter.textContent = result['likes'].length;
-          });
-        } else {
-          like.classList.add('card__like_active');
-          api.setLike(cardData['_id']).then((result) => {
-            likeCounter.textContent = result['likes'].length;
-          });
-        }
+      setLike: (cardId) => {
+        return api.setLike(cardId).then((result) => {
+          return result['likes'].length;
+        });
+      },
+      deleteLike: (cardId) => {
+        return api.deleteLike(cardId).then((result) => {
+          return result['likes'].length;
+        });
       },
     },
     '#card'
@@ -101,17 +103,19 @@ const initialCard = (data) => {
 const popupEditProfilePopup = new PopupWithForm(
   '#profileEditPopup',
   (formData) => {
+    changeTextOnSaveButton(profilePopup);
     api
       .setProfile(formData)
-      .then((result) => {
-        changeTextOnSaveButton(profilePopup);
-        return result;
-      })
       .then((result) => {
         personalProfile.setUserInfo(result);
       })
       .then(() => {
         popupEditProfilePopup.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
         changeTextOnSaveButton(profilePopup);
       });
   }
@@ -119,17 +123,19 @@ const popupEditProfilePopup = new PopupWithForm(
 popupEditProfilePopup.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm('#avatarUpdatePopup', (data) => {
+  changeTextOnSaveButton(avatarPopup);
   api
     .setAvatar(data['link'])
     .then((result) => {
-      changeTextOnSaveButton(avatarPopup);
-      return result;
-    })
-    .then((result) => {
-      personalProfile.setAvatar(result['link']);
+      personalProfile.setAvatar(result['avatar']);
     })
     .then(() => {
       popupEditAvatar.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
       changeTextOnSaveButton(avatarPopup);
     });
 });
@@ -139,17 +145,19 @@ const popupImage = new PopupWithImage('#imagePopup');
 popupImage.setEventListeners();
 
 const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
+  changeTextOnSaveButton(cardAddPopup);
   api
     .sendNewCard(formData)
-    .then((result) => {
-      changeTextOnSaveButton(cardAddPopup);
-      return result;
-    })
     .then((result) => {
       cardList.addItem(initialCard(result));
     })
     .then(() => {
       popupAddCard.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
       changeTextOnSaveButton(cardAddPopup);
     });
 });
@@ -157,13 +165,18 @@ popupAddCard.setEventListeners();
 
 const popupConfirmDeleteCard = new PopupWithConfirmation(
   '#cardConfirmDeletePopup',
-  (cardId) => {
-    console.log(cardId);
-    api.deleteCard(cardId).then((result) => {
-      if (result['message'] == 'Пост удалён') {
-        popupConfirmDeleteCard.close();
-      }
-    });
+  (cardId, card) => {
+    api
+      .deleteCard(cardId)
+      .then((result) => {
+        if (result['message'] === 'Пост удалён') {
+          popupConfirmDeleteCard.close();
+          card.remove();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 );
 popupConfirmDeleteCard.setEventListeners();
