@@ -150,17 +150,19 @@ const popupImage = new PopupWithImage('#imagePopup');
 popupImage.setEventListeners();
 
 const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
+  changeTextOnSaveButton(cardAddPopup);
   api
     .sendNewCard(formData)
-    .then((result) => {
-      changeTextOnSaveButton(cardAddPopup);
-      return result;
-    })
     .then((result) => {
       cardList.addItem(initialCard(result));
     })
     .then(() => {
       popupAddCard.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
       changeTextOnSaveButton(cardAddPopup);
     });
 });
