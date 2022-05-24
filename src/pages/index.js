@@ -48,7 +48,13 @@ const changeTextOnSaveButton = (popup) => {
   }
 };
 
-const api = new Api(authConfig);
+const api = new Api({
+  baseUrl: `https:///mesto.nomoreparties.co/v1/${authConfig.cohortId}`,
+  headers: {
+    authorization: `${authConfig.token}`,
+    'Content-Type': 'application/json',
+  },
+});
 
 api.getInitialCards().then((result) => {
   result.forEach((card) => {
