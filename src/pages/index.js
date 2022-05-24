@@ -126,17 +126,19 @@ const popupEditProfilePopup = new PopupWithForm(
 popupEditProfilePopup.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm('#avatarUpdatePopup', (data) => {
+  changeTextOnSaveButton(avatarPopup);
   api
     .setAvatar(data['link'])
     .then((result) => {
-      changeTextOnSaveButton(avatarPopup);
-      return result;
-    })
-    .then((result) => {
-      personalProfile.setAvatar(result['link']);
+      personalProfile.setAvatar(result['avatar']);
     })
     .then(() => {
       popupEditAvatar.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
       changeTextOnSaveButton(avatarPopup);
     });
 });
