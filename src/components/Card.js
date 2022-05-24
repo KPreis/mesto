@@ -55,10 +55,6 @@ export default class Card {
     }
   }
 
-  removeCard = () => {
-    this._card.remove();
-  };
-
   _setEventListeners() {
     this._card.querySelector('.card__img').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
@@ -67,7 +63,7 @@ export default class Card {
       this._handleLikeClick();
     });
     this._card.querySelector('.card__delete').addEventListener('click', () => {
-      this._handleDeleteCardClick(this._data['_id']);
+      this._handleDeleteCardClick(this._data['_id'], this._card);
     });
   }
 

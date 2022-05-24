@@ -79,8 +79,8 @@ const initialCard = (data) => {
       },
       isCreator: userID == data['owner']['_id'],
       currentUserId: userID,
-      handleDeleteCardClick: (cardId) => {
-        popupConfirmDeleteCard.open(cardId);
+      handleDeleteCardClick: (cardDeleteId, cardDelete) => {
+        popupConfirmDeleteCard.open(cardDeleteId, cardDelete);
       },
       setLike: (cardId) => {
         return api.setLike(cardId).then((result) => {
@@ -165,12 +165,13 @@ popupAddCard.setEventListeners();
 
 const popupConfirmDeleteCard = new PopupWithConfirmation(
   '#cardConfirmDeletePopup',
-  (cardId) => {
+  (cardId, card) => {
     api
       .deleteCard(cardId)
       .then((result) => {
-        if (result['message'] == 'Пост удалён') {
+        if (result['message'] === 'Пост удалён') {
           popupConfirmDeleteCard.close();
+          card.remove();
         }
       })
       .catch((error) => {
