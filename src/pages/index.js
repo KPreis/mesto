@@ -108,17 +108,19 @@ const initialCard = (data) => {
 const popupEditProfilePopup = new PopupWithForm(
   '#profileEditPopup',
   (formData) => {
+    changeTextOnSaveButton(profilePopup);
     api
       .setProfile(formData)
-      .then((result) => {
-        changeTextOnSaveButton(profilePopup);
-        return result;
-      })
       .then((result) => {
         personalProfile.setUserInfo(result);
       })
       .then(() => {
         popupEditProfilePopup.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
         changeTextOnSaveButton(profilePopup);
       });
   }
