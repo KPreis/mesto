@@ -6,7 +6,9 @@ export default class Card {
       isCreator,
       currentUserId,
       handleDeleteCardClick,
-      handleLikeClick,
+      setLike,
+      deleteLike,
+      // handleLikeClick,
     },
     cardSelector
   ) {
@@ -18,7 +20,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
-    this._handleLikeClick = handleLikeClick;
+    this._setLike = setLike;
+    this._deleteLike = deleteLike;
+    //this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -28,13 +32,29 @@ export default class Card {
       .cloneNode(true);
     return cardElement;
   }
-  /*
+
   _handleLikeClick() {
-    this._card
-      .querySelector('.card__like')
-      .classList.toggle('card__like_active');
+    if (this._like.classList.contains('card__like_active')) {
+      this._like.classList.remove('card__like_active');
+      this._deleteLike(this._data['_id'])
+        .then((result) => {
+          this._likeCounter.textContent = result;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      this._like.classList.add('card__like_active');
+      this._setLike(this._data['_id'])
+        .then((result) => {
+          this._likeCounter.textContent = result;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
-*/
+
   removeCard = () => {
     this._card.remove();
   };
@@ -44,7 +64,7 @@ export default class Card {
       this._handleCardClick(this._name, this._link);
     });
     this._card.querySelector('.card__like').addEventListener('click', () => {
-      this._handleLikeClick(this._card, this._data);
+      this._handleLikeClick();
     });
     this._card.querySelector('.card__delete').addEventListener('click', () => {
       this._handleDeleteCardClick(this._data['_id']);

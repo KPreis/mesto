@@ -58,12 +58,13 @@ const api = new Api({
 
 Promise.all([api.getInitialCards(), api.getProfile()])
   .then(([cards, userData]) => {
-    cards.forEach((card) => {
-      cardList.addItem(initialCard(card));
-    });
     personalProfile.setUserInfo(userData);
     personalProfile.setAvatar(userData['avatar']);
     userID = userData['_id'];
+
+    cards.forEach((card) => {
+      cardList.addItem(initialCard(card));
+    });
   })
   .catch((error) => {
     console.log(error);
@@ -81,21 +82,15 @@ const initialCard = (data) => {
       handleDeleteCardClick: (cardId) => {
         popupConfirmDeleteCard.open(cardId);
       },
-      handleLikeClick: (cardLiking, cardData) => {
-        const like = cardLiking.querySelector('.card__like');
-        const likeCounter = cardLiking.querySelector('.card__like-counter');
-
-        if (like.classList.contains('card__like_active')) {
-          like.classList.remove('card__like_active');
-          api.deleteLike(cardData['_id']).then((result) => {
-            likeCounter.textContent = result['likes'].length;
-          });
-        } else {
-          like.classList.add('card__like_active');
-          api.setLike(cardData['_id']).then((result) => {
-            likeCounter.textContent = result['likes'].length;
-          });
-        }
+      setLike: (cardId) => {
+        return api.setLike(cardId).then((result) => {
+          return result['likes'].length;
+        });
+      },
+      deleteLike: (cardId) => {
+        return api.deleteLike(cardId).then((result) => {
+          return result['likes'].length;
+        });
       },
     },
     '#card'
@@ -171,12 +166,16 @@ popupAddCard.setEventListeners();
 const popupConfirmDeleteCard = new PopupWithConfirmation(
   '#cardConfirmDeletePopup',
   (cardId) => {
-    console.log(cardId);
-    api.deleteCard(cardId).then((result) => {
-      if (result['message'] == 'Пост удалён') {
-        popupConfirmDeleteCard.close();
-      }
-    });
+    api
+      .deleteCard(cardId)
+      .then((result) => {
+        if (result['message'] == 'Пост удалён') {
+          popupConfirmDeleteCard.close();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 );
 popupConfirmDeleteCard.setEventListeners();
