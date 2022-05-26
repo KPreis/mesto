@@ -22,7 +22,16 @@ const avatarPopup = document.querySelector('#avatarUpdatePopup');
 
 let userID = '';
 
-const cardList = new Section('.galary__cards-list');
+const cardList = new Section(
+  {
+    renderer: (items) => {
+      items.forEach((item) => {
+        galary.querySelector('.galary__cards-list').append(createCard(item));
+      });
+    },
+  },
+  '.galary__cards-list'
+);
 
 const validatorProfilePopup = new FormValidator(validationConfig, profilePopup);
 
@@ -62,15 +71,13 @@ Promise.all([api.getInitialCards(), api.getProfile()])
     personalProfile.setAvatar(userData['avatar']);
     userID = userData['_id'];
 
-    cards.forEach((card) => {
-      cardList.addItem(initialCard(card));
-    });
+    cardList.renderItems(cards);
   })
   .catch((error) => {
     console.log(error);
   });
 
-const initialCard = (data) => {
+const createCard = (data) => {
   const card = new Card(
     {
       data: data,
@@ -149,7 +156,7 @@ const popupAddCard = new PopupWithForm('#cardAddPopup', (formData) => {
   api
     .sendNewCard(formData)
     .then((result) => {
-      cardList.addItem(initialCard(result));
+      cardList.addItem(createCard(result));
     })
     .then(() => {
       popupAddCard.close();
