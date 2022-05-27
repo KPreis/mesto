@@ -24,10 +24,8 @@ let userID = '';
 
 const cardList = new Section(
   {
-    renderer: (items) => {
-      items.forEach((item) => {
-        galary.querySelector('.galary__cards-list').append(createCard(item));
-      });
+    renderer: (item) => {
+      cardList.appendItem(createCard(item));
     },
   },
   '.galary__cards-list'
