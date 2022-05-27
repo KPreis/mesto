@@ -13,11 +13,7 @@ export default class FormValidator {
     this._errorElement = this._formElement.querySelector(
       `.${inputItem.id}-error`
     );
-    this._buttonSave = this._formElement.querySelector(
-      this._submitButtonSelector
-    );
 
-    this._buttonSave.classList.add(this._inactiveButtonClass);
     inputItem.classList.add(this._inputErrorClass);
     this._errorElement.textContent = errorMessage;
     this._errorElement.classList.add(this._errorClass);
